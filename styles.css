@@ -24,17 +24,17 @@
   /* charcoal lembut */
   --ink: #D5DCE4;
   --soft: #9AA5B1;
-  --card: #2B313B;
+  --card: #38414F;
   --tangerine: #F08B52;
   --tangerine-soft: #54301A;
   --teal: #3BAE97;
   --teal-soft: #124A3D;
   --action-link: #63D4BD;
   --action-link-hover: #9AEBD9;
-  --sun: #E9C254;
-  --sun-soft: #4E4012;
+  --sun: #FEF08A;
+  --sun-soft: #5E4609;
   --sky-soft: #1E3A57;
-  --dot: rgba(213, 220, 228, .04);
+  --dot: rgba(255, 255, 255, 0.08);
   --topbar: rgba(34, 38, 46, .92);
   --footer-bg: #1B1F26;
 }
@@ -447,6 +447,7 @@ h2 {
 .tags li:nth-child(4n+4) {
   background: var(--sky-soft)
 }
+
 
 .info-grid {
   display: flex;
