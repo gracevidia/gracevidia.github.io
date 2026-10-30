@@ -447,16 +447,16 @@
           <a href="https://github.com/gracevrp/BDD-Cypress-Project" target="_blank" rel="noopener">View on GitHub
             →</a>
         </article>
-        <article class="proj proj-hidden" style="display:none;">
-          <span class="ptype" style="background: var(--sun-soft); color: var(--ink); border-color: var(--ink);">MOBILE AUTOMATION</span>
-          <h3 style="color: var(--ink);">Flight Booking Automation — Appium</h3>
+        <article class="proj">
+          <span class="ptype">MOBILE AUTOMATION</span>
+          <h3>Flight Booking Automation — Appium</h3>
           <p>Mobile automation tests for a flight booking app — covering one-way
             and round-trip booking flows. Built with Appium and Robot Framework
             using the Page Object Model.</p>
           <a href="https://github.com/gracevrp/Sanber53-Appium-Kelompok-8" target="_blank" rel="noopener">View on GitHub →</a>
         </article>
       </div>
-      <div class="project-actions" style="display: flex; justify-content: center; margin-top: 26px;">
+      <div class="project-actions" hidden>
         <button id="projectMoreBtn" class="btn btn-sun" type="button">Open more</button>
       </div>
     </div>
@@ -504,32 +504,34 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    navigator.serviceWorker.register('/portofolio/sw.js');
+    // service worker (offline page) — hanya jika browser mendukung
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/portofolio/sw.js');
+    }
 
+    // Projects: semua kartu tampil. Tombol "Open more" HANYA muncul
+    // kalau jumlah project melebihi PROJECT_LIMIT (2 baris x 3 kartu).
+    const PROJECT_LIMIT = 6;
+    const projectCards = Array.from(document.querySelectorAll('#projects .proj'));
     const projectMoreBtn = document.getElementById('projectMoreBtn');
-    const ensureHiddenProjects = () => {
-      document.querySelectorAll('.proj-hidden').forEach(el => el.style.display = 'none');
-    };
+    const projectActions = document.querySelector('#projects .project-actions');
+    let projectsExpanded = false;
 
-    document.addEventListener('DOMContentLoaded', ensureHiddenProjects);
-    ensureHiddenProjects();
+    function renderProjects() {
+      const needsToggle = projectCards.length > PROJECT_LIMIT;
+      projectCards.forEach((card, i) => {
+        card.classList.toggle('proj-hidden', needsToggle && !projectsExpanded && i >= PROJECT_LIMIT);
+      });
+      if (projectActions) projectActions.hidden = !needsToggle;
+      if (projectMoreBtn) projectMoreBtn.textContent = projectsExpanded ? 'Show less' : 'Open more';
+    }
 
     projectMoreBtn?.addEventListener('click', () => {
-      const hiddenProjects = document.querySelectorAll('.proj-hidden');
-      if (hiddenProjects.length > 0) {
-        hiddenProjects.forEach(el => {
-          el.classList.remove('proj-hidden');
-          el.style.display = '';
-        });
-        projectMoreBtn.textContent = 'Show less';
-      } else {
-        document.querySelectorAll('#projects .proj:nth-child(n+4)').forEach(el => {
-          el.classList.add('proj-hidden');
-          el.style.display = 'none';
-        });
-        projectMoreBtn.textContent = 'Open more';
-      }
+      projectsExpanded = !projectsExpanded;
+      renderProjects();
     });
+
+    renderProjects();
   </script>
 </body>
 

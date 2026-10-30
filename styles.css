@@ -896,20 +896,16 @@ h2 {
   padding: 3px 10px;
 }
 
-.proj:nth-child(1) .ptype {
+.proj:nth-child(3n+1) .ptype {
   background: var(--sun-soft)
 }
 
-.proj:nth-child(2) .ptype {
+.proj:nth-child(3n+2) .ptype {
   background: var(--teal-soft)
 }
 
-.proj:nth-child(3) .ptype {
+.proj:nth-child(3n+3) .ptype {
   background: var(--tangerine-soft)
-}
-
-.proj:nth-child(4) .ptype {
-  background: var(--sun-soft);
 }
 
 .proj h3 {
@@ -943,6 +939,10 @@ h2 {
   display: flex;
   justify-content: center;
   margin-top: 26px;
+}
+
+.project-actions[hidden] {
+  display: none;
 }
 
 .proj-hidden {
