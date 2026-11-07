@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png">
+</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connection Lost | QA Portfolio</title>
+<!-- This page intentionally loads NO external fonts or resources,
+     since it is shown exactly when there is no internet connection. -->
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --ink: #23303B;
+    --soft: #5E6B76;
+    --teal: #119C84;
+    --teal-soft: #DCF3EE;
+    --sun: #FFD23F;
+    --fail: #D64545;
+    --fail-soft: #FBE4E4;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    padding: 24px;
+    background-image: radial-gradient(rgba(35, 48, 59, .08) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+
+  .wrap {
+    max-width: 480px;
+    width: 100%;
+    text-align: center
+  }
+
+  .icon {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 22px;
+    border-radius: 22px;
+    background: var(--fail-soft);
+    border: 2.5px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    display: grid;
+    place-items: center;
+    font-size: 36px;
+  }
+
+  h1 {
+    font-size: clamp(24px, 5vw, 32px);
+    font-weight: 800;
+    letter-spacing: -.01em;
+    margin-bottom: 10px
+  }
+
+  p {
+    color: var(--soft);
+    font-size: 15px;
+    margin-bottom: 26px
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: ui-monospace, "Courier New", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--fail-soft);
+    border: 2px solid var(--ink);
+    padding: 6px 14px;
+    border-radius: 99px;
+    margin-bottom: 22px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+
+  .status .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--fail)
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: ui-monospace, "Courier New", monospace;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 13px 26px;
+    border-radius: 14px;
+    border: 2.5px solid var(--ink);
+    color: #23303B;
+    background: var(--sun);
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform .12s, box-shadow .12s;
+  }
+
+  .btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--ink)
+  }
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="icon">📡</div>
+    <div class="status"><span class="dot"></span>status: OFFLINE · 0 passed, 1 failed</div>
+    <h1>Connection lost</h1>
+    <p>This page needs the internet, and right now there isn't any.
+      Check your connection, then run the test again.</p>
+    <button class="btn" onclick="location.reload()">↻ Retry connection</button>
+  </div>
+</body>
+
+</html>
