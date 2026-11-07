@@ -17,31 +17,34 @@ export type ExperienceItemData = {
   org: string;
   employmentType: string;
   period: string;
+  /** Total months (inclusive), rendered as a count-up "1y 10m". Current jobs compute this live. */
+  durationMonths?: number;
   location: string;
+  workMode: string;
   logo: string;
   logoVariant: 'w4c' | 'dealls' | 'dame-ulos' | 'digitalent' | 'jatis' | 'code-id';
   fallback: string;
+  isCurrent?: boolean;
   bullets: string[];
 };
 
 export const EXPERIENCES: ExperienceItemData[] = [
   {
-    id: 'w4c-freelance',
-    title: 'Quality Assurance',
-    org: 'Waste4Change · Waste Management',
+    id: 'dame-ulos',
+    title: 'Project Manager',
+    org: 'Dame Ulos · Traditional Textile',
     employmentType: 'Freelance',
-    period: 'May 2024 – Sept 2026',
-    location: 'Bekasi',
-    logo: '/img/company-logo/w4c.webp',
-    logoVariant: 'w4c',
-    fallback: 'W',
+    period: 'Jun 2025 - Present',
+    location: 'Jakarta, Indonesia',
+    workMode: 'Remote',
+    logo: '/img/company-logo/dame-ulos.webp',
+    logoVariant: 'dame-ulos',
+    fallback: 'D',
+    isCurrent: true,
     bullets: [
-      'Designed and executed manual, smoke, and regression test cases for client dashboards.',
-      'Identified, tracked, and reported defects.',
-      'Maintained and updated test case documentation.',
-      'Collaborated with internal stakeholders during User Acceptance Testing (UAT) prior to major releases.',
-      'Analyzed requirements to provide feedback, quality evaluations, and recommendations.',
-      'Conducted regular system monitoring after deployment.'
+      '*UI Design & Requirement Engineering*: Designing user interfaces using Figma while leading requirement discussions with stakeholders to define project deliverables, scope, and specifications.',
+      '*Cross-Functional Coordinatio*n: Facilitating end-to-end communication with engineering teams throughout the development lifecycle to ensure smooth delivery.',
+      '*Quality & Issue Resolution*: Performing manual testing against project requirements and investigating user-reported issues to identify root causes for prompt resolution.',
     ]
   },
   {
@@ -49,35 +52,17 @@ export const EXPERIENCES: ExperienceItemData[] = [
     title: 'Quality Assurance Analyst',
     org: 'Dealls · Human Resource Information System',
     employmentType: 'Full-time',
-    period: 'Jun 2024 – May 2026',
-    location: 'Jakarta',
+    period: 'Jun 2024 - May 2026',
+    durationMonths: 24,
+    location: 'Jakarta, Indonesia',
+    workMode: 'Remote',
     logo: '/img/company-logo/dealls.webp',
     logoVariant: 'dealls',
     fallback: 'D',
     bullets: [
-      'Oversee quality for several modules in the Kantorku (HRIS) mobile (Android/iOS) and web application, namely Attendance, Shift, On-Call, and OKR.',
-      'Design, maintain, and execute test cases, including smoke testing before production releases.',
-      'Drive feature improvement based on requirements analysis through product requirement document development, partnering with engineering and product teams for effective delivery.',
-      'Perform ad hoc API testing using Postman.',
-      'Address user issues reported by customer support and reproduced them to identify root causes.'
-    ]
-  },
-  {
-    id: 'dame-ulos',
-    title: 'Project Manager & Quality Assurance',
-    org: 'Dame Ulos · Traditional Textile',
-    employmentType: 'Freelance',
-    period: 'Jun 2025 - May 2026',
-    location: 'Tarutung',
-    logo: '/img/company-logo/dame-ulos.webp',
-    logoVariant: 'dame-ulos',
-    fallback: 'D',
-    bullets: [
-      'Design user interfaces using Figma.',
-      'Lead requirement discussions, define deliverables, and document project scope with stakeholders.',
-      'Coordinate communication with developers throughout the development lifecycle.',
-      'Perform manual testing to validate functionality and ensure alignment with requirements.',
-      'Investigate and reproduce user-reported issues to identify root causes and support timely resolution.'
+      '*End-to-End Test Execution*: Designed, maintained, and executed manual, smoke, and ad hoc API test cases (via Postman) across web and mobile (Android/iOS) platforms for key HRIS modules, including Attendance, Shift, On-Call, and OKR.',
+      '*Product Quality & Strategy*: Analyzed product requirement documents (PRDs) and collaborated with engineering and product teams to drive feature improvements and ensure smooth release deliveries.',
+      '*Defect & Root Cause Analysis*: Investigated and reproduced user-reported issues escalated by customer support to pinpoint root causes and facilitate resolution.',
     ]
   },
   {
@@ -85,25 +70,29 @@ export const EXPERIENCES: ExperienceItemData[] = [
     title: 'Quality Assurance',
     org: 'Waste4Change · Waste Management',
     employmentType: 'Contract',
-    period: 'Sep 2022 – Jun 2024',
-    location: 'Bekasi',
+    period: 'Sep 2022 - Jun 2024',
+    durationMonths: 22,
+    location: 'Jakarta, Indonesia',
+    workMode: 'Remote',
     logo: '/img/company-logo/w4c.webp',
     logoVariant: 'w4c',
     fallback: 'W',
     bullets: [
-      'Performed QA for trading and production applications by designing and executing test cases, including manual, API, and regression testing.',
-      'Identified defects, reported results, and supported on-demand testing for newly deployed features.',
-      'Maintained and updated test cases, master test plans, and versioning documentation across environments.',
-      'Participated in UAT before major releases.'
+      '*Test Planning & Execution*: Designed, maintained, and executed end-to-end test cases (manual, API, smoke, and regression) for trading, production applications, and client dashboards across environments.',
+      '*Defect & Lifecycle Management*: Identified, tracked, and reported software defects while conducting post-deployment system monitoring to ensure application stability.',
+      '*UAT & Stakeholder Collaboration*: Partnered with internal stakeholders to drive User Acceptance Testing (UAT) prior to major releases and provided on-demand testing for newly deployed features.',
+      '*Requirement Analysis & Documentation*: Analyzed product requirements to deliver quality evaluations and recommendations while maintaining master test plans and versioning documentation.'
     ]
   },
   {
     id: 'digitalent',
-    title: 'Digital Talent Scholarship Mentor',
-    org: 'Women In Tech ID',
-    employmentType: 'Part-time',
-    period: 'May 2023 – July 2023',
-    location: 'Jakarta',
+    title: 'Mentor (Women In Tech: Python and Cybersecurity)',
+    org: 'Digital Talent Scholarship',
+    employmentType: 'Contract',
+    period: 'May 2023 - July 2023',
+    durationMonths: 3,
+    location: 'Jakarta, Indonesia',
+    workMode: 'Remote',
     logo: '/img/company-logo/digitalent.webp',
     logoVariant: 'digitalent',
     fallback: 'D',
@@ -114,11 +103,13 @@ export const EXPERIENCES: ExperienceItemData[] = [
   },
   {
     id: 'jatis-mobile',
-    title: 'Front-End Developer',
+    title: 'Frontend Developer',
     org: 'Jatis Mobile',
     employmentType: 'Internship',
-    period: 'Oct 2021 – Feb 2022',
-    location: 'Jakarta',
+    period: 'Oct 2021 - Feb 2022',
+    durationMonths: 5,
+    location: 'Jakarta, Indonesia',
+    workMode: 'Remote',
     logo: '/img/company-logo/jatis-mobile.webp',
     logoVariant: 'jatis',
     fallback: 'J',
@@ -129,11 +120,13 @@ export const EXPERIENCES: ExperienceItemData[] = [
   },
   {
     id: 'code-id',
-    title: 'Android Developer',
+    title: 'Frontend Developer',
     org: 'PT Code Development Indonesia',
     employmentType: 'Internship',
     period: 'Jun 2021 - Aug 2021',
-    location: 'Jakarta',
+    durationMonths: 3,
+    location: 'Jakarta, Indonesia',
+    workMode: 'Remote',
     logo: '/img/company-logo/code.id.webp',
     logoVariant: 'code-id',
     fallback: 'C',
@@ -157,19 +150,19 @@ export const EDUCATION: EducationItemData[] = [
     school: 'Institut Teknologi Del',
     degree: 'Bachelor of Engineering, Information System',
     grade: 'GPA: 3.27 / 4.00',
-    period: 'Aug 2018 – Aug 2022'
+    period: 'Aug 2018 - Aug 2022'
   },
   {
     id: 'sanbercode',
     school: 'Sanbercode',
     degree: 'Quality Assurance Bootcamp',
-    period: 'Jan 2024 – Feb 2024'
+    period: 'Jan 2024 - Feb 2024'
   },
   {
     id: 'afteroffice',
     school: 'AfterOffice Academy',
     degree: 'Intensive QA Automation Bootcamp – Cypress',
-    period: 'Apr 2025 – Jun 2025'
+    period: 'Apr 2025 - Jun 2025'
   }
 ];
 
