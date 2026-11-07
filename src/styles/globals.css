@@ -433,12 +433,9 @@ h2 {
   border: 3px solid var(--ink);
 }
 
-.ticket:nth-child(2n)::before {
+/* Current job: sun yellow dot. */
+.ticket--current::before {
   background: var(--sun);
-}
-
-.ticket:nth-child(3n)::before {
-  background: var(--tangerine);
 }
 
 .ticket-card {
@@ -460,7 +457,6 @@ h2 {
   width: 54px;
   height: 54px;
   flex-shrink: 0;
-  border: 2.5px solid var(--ink);
   border-radius: 13px;
   background: var(--logo-bg, var(--sky-soft));
   color: var(--logo-fg, var(--ink));
@@ -471,6 +467,17 @@ h2 {
   font-weight: 800;
   font-size: 22px;
   box-shadow: 3px 3px 0 rgba(35, 48, 59, .15);
+}
+
+/* Frame drawn above the img so the white logo background can never cover it. */
+.ticket-logo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 2.5px solid var(--ink);
+  border-radius: 13px;
+  pointer-events: none;
 }
 
 .ticket-logo-fallback {
@@ -538,19 +545,26 @@ h2 {
 }
 
 .ticket-title h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-google-sans), sans-serif;
   font-weight: 700;
   font-size: 20px;
 }
 
-.ticket-title .org {
-  color: var(--soft);
-  font-size: 14.5px;
-  font-weight: 600;
+/* Pulsing teal dot marking the current job (same pulse as the status pill). */
+.active-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2s infinite;
 }
 
-.ticket-status {
-  font-family: var(--font-google-sans), monospace;
+/* Job status next to the title: done vs running. */
+.ticket-passed {
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: .06em;
@@ -558,11 +572,29 @@ h2 {
   background: var(--teal);
   border: 2px solid var(--ink);
   border-radius: 8px;
-  padding: 5px 10px;
-  margin-top: 3px;
-  white-space: nowrap;
-  transform: rotate(2deg);
-  box-shadow: 2px 2px 0 var(--ink);
+  padding: 2px 8px;
+}
+
+.ticket-running {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: #23303B;
+  background: var(--sun);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
+.ticket-running-emoji {
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+.ticket-title .org {
+  color: var(--soft);
+  font-size: 14.5px;
+  font-weight: 600;
 }
 
 .ticket-period {
@@ -1109,11 +1141,6 @@ footer {
 
   .ticket-title .org {
     font-size: 13px;
-  }
-
-  .ticket-status {
-    font-size: 9px;
-    padding: 3px 7px;
   }
 
   .ticket-period {
