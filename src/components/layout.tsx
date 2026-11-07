@@ -1,7 +1,8 @@
 import { ReactNode, useEffect, useSyncExternalStore } from 'react';
+import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import localFont from 'next/font/local';
-import { Moon, Sun } from 'lucide-react';
+import { House, Moon, Sun } from 'lucide-react';
 import { PROFILE } from 'data/profile';
 import { cn } from 'lib/cn';
 
@@ -27,10 +28,14 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     <div className={cn(googleSans.className, googleSans.variable)}>
       <header className="topbar">
         <div className="wrap topbar-inner">
-          <a className="brand" href="#">
+          <span className="brand">
             {PROFILE.brand} <span className="chip">{PROFILE.brandChip}</span>
-          </a>
+          </span>
           <div className="top-right">
+            {/* Home mark: lucide House (ISC-licensed), currentColor follows the theme. */}
+            <Link href="/" aria-label="Home" className="icon-btn">
+              <House />
+            </Link>
             <ThemeToggle />
           </div>
         </div>
@@ -53,13 +58,13 @@ function ThemeToggle() {
   const isDark = resolvedTheme === 'dark';
   return (
     <button
-      id="themeBtn"
       type="button"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label="Toggle light/dark mode"
+      className="icon-btn"
     >
       {/* Defaults to light, so the pre-hydration placeholder is the moon. */}
-      {!mounted ? <Moon size={16} aria-hidden /> : isDark ? <Sun size={16} aria-hidden /> : <Moon size={16} aria-hidden />}
+      {!mounted ? <Moon aria-hidden /> : isDark ? <Sun aria-hidden /> : <Moon aria-hidden />}
     </button>
   );
 }
