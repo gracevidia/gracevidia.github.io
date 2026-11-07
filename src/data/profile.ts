@@ -25,7 +25,7 @@ export const PROFILE = {
   displayName: 'Grace Vidia Rosa Panjaitan',
   role: 'QA Engineer',
   avatar: '/img/pfp.webp',
-  brand: 'gracevrp.qa',
+  brand: 'test-suite.qa',
   brandChip: 'PASSED ✓',
   socials
 };

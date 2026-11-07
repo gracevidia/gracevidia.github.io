@@ -45,6 +45,15 @@
   --footer-bg: #1B1F26;
 }
 
+/*
+ * Tailwind color utilities used in the JSX (topbar icons) resolve against
+ * the palette above.
+ */
+@theme inline {
+  --color-muted: var(--soft);
+  --color-accent: var(--teal);
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -122,26 +131,6 @@ button:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-#themeBtn {
-  background: var(--card);
-  border: 2px solid var(--ink);
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 15px;
-  display: grid;
-  place-items: center;
-  color: var(--ink);
-  box-shadow: 3px 3px 0 var(--ink);
-  transition: transform .12s, box-shadow .12s;
-}
-
-#themeBtn:hover {
-  transform: translate(1px, 1px);
-  box-shadow: 2px 2px 0 var(--ink);
 }
 
 /* ---------- hero ---------- */

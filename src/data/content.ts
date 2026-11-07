@@ -6,7 +6,7 @@ export const CONTENT = {
   ],
   tags: ['🔍 Detail-oriented', '⚡ Agile / Scrum', '📱 Web · Mobile · API', '🐞 Bug Advocate', '🚀 Fast Learner'],
   infoCards: [
-    { k: 'Location', v: 'Medan, Indonesia' },
+    { k: 'Location', v: 'Jakarta, Indonesia' },
     { k: 'Work preference', v: 'Remote / Hybrid / On-site' }
   ]
 } as const;
