@@ -553,13 +553,13 @@ h2 {
   font-size: 20px;
 }
 
-/* Pulsing teal dot marking the current job (same pulse as the status pill). */
+/* Pulsing sun dot marking the current job (matches the timeline dot). */
 .active-dot {
   display: inline-block;
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--sun);
   animation: pulse 2s infinite;
 }
 
@@ -642,6 +642,18 @@ h2 {
   color: var(--teal);
   font-weight: 800;
   font-size: 14px;
+}
+
+/* Current job: pulsing yellow dots like the active-dot, instead of checks. */
+.ticket--current .ticket-body ul li::before {
+  content: "";
+  left: 4px;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sun);
+  animation: pulse 2s infinite;
 }
 
 /* education */
