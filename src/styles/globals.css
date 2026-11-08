@@ -285,16 +285,16 @@ h2 {
   flex: 0 1 auto;
   background: var(--card);
   border: 2.5px solid var(--ink);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 12px 24px 12px 18px;
-  box-shadow: 4px 4px 0 rgba(35, 48, 59, .12);
+  box-shadow: 3px 3px 0 var(--ink);
   transition: transform .15s, box-shadow .15s;
 }
 
 /* Pop on hover like the other cards. */
 .info-card:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 rgba(35, 48, 59, .18);
+  box-shadow: 5px 5px 0 var(--ink);
 }
 
 .info-card .k {
@@ -578,7 +578,7 @@ h2 {
 .plain-list li {
   background: var(--card);
   border: 2.5px solid var(--ink);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 14px 20px;
   margin-bottom: 12px;
   display: flex;
@@ -749,8 +749,8 @@ h2 {
 
 .proj:hover {
   transform: translate(-2px, -2px);
-  /* Shadow stays flush with the frame while the card lifts. */
-  box-shadow: 3px 3px 0 var(--ink);
+  /* Same hard shadow as the other cards; the scroll row has padding for it. */
+  box-shadow: 5px 5px 0 var(--ink);
 }
 
 /* Section header: title left, optional actions (nav buttons) right. */
@@ -787,9 +787,12 @@ h2 {
   transition: transform .12s, box-shadow .12s;
 }
 
-.proj-nav:hover {
+.proj-nav:hover:not(:disabled) {
   transform: translate(-1px, -1px);
   box-shadow: 4px 4px 0 var(--ink);
+  /* Yellow like the home/icon buttons on hover. */
+  background: var(--sun);
+  color: #23303B;
 }
 
 .proj-nav:active {
@@ -802,6 +805,7 @@ h2 {
   cursor: default;
   transform: none;
   box-shadow: 3px 3px 0 var(--ink);
+  color: var(--ink);
 }
 
 .ptype-row {
@@ -905,7 +909,7 @@ footer {
 }
 
 .foot-top:hover {
-  color: var(--teal);
+  color: var(--sun);
 }
 
 /* social icon buttons (hero) */
@@ -1211,7 +1215,7 @@ footer {
 }
 
 [data-theme="dark"] .proj:hover {
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, .5);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, .5);
 }
 
 [data-theme="dark"] .ticket-card:hover,
@@ -1231,4 +1235,20 @@ footer {
 
 [data-theme="dark"] .info-card:hover {
   box-shadow: 5px 5px 0 rgba(0, 0, 0, .5);
+}
+
+/* Dark-mode hard shadows for the ink-shadowed controls. */
+[data-theme="dark"] .stack-items li,
+[data-theme="dark"] .icon-btn,
+[data-theme="dark"] .proj-nav {
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, .35);
+}
+
+[data-theme="dark"] .stack-items li:hover {
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, .5);
+}
+
+[data-theme="dark"] .icon-btn:hover,
+[data-theme="dark"] .proj-nav:hover {
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, .5);
 }
