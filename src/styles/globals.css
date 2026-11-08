@@ -21,7 +21,6 @@
   --sky-soft: #E3F0FB;
   --dot: rgba(35, 48, 59, .08);
   --topbar: rgba(255, 255, 255, .9);
-  --footer-bg: #0F6354;
   --radius: 16px;
 }
 
@@ -42,7 +41,6 @@
   --sky-soft: #1E3A57;
   --dot: rgba(255, 255, 255, 0.08);
   --topbar: rgba(34, 38, 46, .92);
-  --footer-bg: #1B1F26;
 }
 
 /*
@@ -195,17 +193,6 @@ button:focus-visible {
   box-shadow: 3px 3px 0 var(--ink);
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: .3;
-  }
-}
-
 /* Expanding ripple (same speed/spread as Tailwind's animate-ping). */
 @keyframes ping {
   75%,
@@ -255,38 +242,6 @@ h1 {
   font-weight: 700;
   letter-spacing: -.01em;
   margin-bottom: 16px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-google-sans), monospace;
-  font-size: 13.5px;
-  font-weight: 700;
-  text-decoration: none;
-  padding: 13px 24px;
-  border-radius: 14px;
-  border: 2.5px solid var(--ink);
-  color: var(--ink);
-  box-shadow: 4px 4px 0 var(--ink);
-  transition: transform .12s, box-shadow .12s;
-  background: var(--card);
-}
-
-.btn:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--ink);
-}
-
-.btn:active {
-  transform: translate(4px, 4px);
-  box-shadow: 0 0 0 var(--ink);
-}
-
-.btn-sun {
-  background: var(--sun);
-  color: #23303B;
 }
 
 /* ---------- sections ---------- */
@@ -536,34 +491,6 @@ h2 {
   background: var(--sun);
   opacity: .5;
   animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-/* Job status next to the title: done vs running. */
-.ticket-passed {
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  color: #fff;
-  background: var(--teal);
-  border: 2px solid var(--ink);
-  border-radius: 8px;
-  padding: 2px 8px;
-}
-
-.ticket-running {
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  color: #23303B;
-  background: var(--sun);
-  border: 2px solid var(--ink);
-  border-radius: 8px;
-  padding: 2px 8px;
-}
-
-.ticket-running-emoji {
-  display: inline-block;
-  animation: pulse 2s infinite;
 }
 
 .ticket-title .org {
