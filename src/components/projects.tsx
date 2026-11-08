@@ -55,6 +55,9 @@ export function Projects() {
   }, []);
 
   const onScroll = () => {
+    // Keep the scrollbar visible while scrolling (mobile has no hover);
+    // it hides 2s after the last scroll event.
+    flashScrollbar();
     syncScrollbar();
     const element = scrollRef.current;
     if (!element) return;
