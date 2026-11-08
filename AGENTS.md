@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Project Rules
 
-QA portfolio for gracevidia.github.io. Next.js 16 (pages router) + React 19 + Tailwind v4, static export for GitHub Pages. Keep it lazy: no new dependencies, no speculative abstractions, shortest working diff.
+Website for gracevidia.github.io. Next.js 16 (pages router) + React 19 + Tailwind v4, static export for GitHub Pages. Keep it lazy: no new dependencies, no speculative abstractions, shortest working diff.
 
 ## Structure
 
