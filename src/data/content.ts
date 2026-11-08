@@ -3,7 +3,7 @@ export const QA_START = 'Sep 2022';
 
 export const CONTENT = {
   about:
-    'QA Engineer with {years}+ of experience delivering dependable web and mobile apps. Known for clear documentation, thorough root-cause analysis, and working closely with dev teams to catch issues early. Grounded in manual testing and currently growing skills in test automation.',
+    'QA Analyst / Engineer with {years}+ of experience delivering dependable web and mobile apps. Known for clear documentation, thorough root-cause analysis, and working closely with dev teams to catch issues early. Grounded in manual testing and currently growing skills in test automation.',
   infoCards: [
     { k: 'Location', v: 'Jakarta, Indonesia' },
     { k: 'Work preference', v: 'Remote / Hybrid / On-site' }
@@ -60,7 +60,7 @@ export const EXPERIENCES: ExperienceItemData[] = [
   },
   {
     id: 'w4c-contract',
-    title: 'Quality Assurance',
+    title: 'Quality Assurance Analyst',
     org: 'Waste4Change · Waste Management',
     employmentType: 'Full-time',
     period: 'Sep 2022 - May 2024',

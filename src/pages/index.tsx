@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Meta
-        title="Grace Panjaitan - QA Engineer"
+        title="Grace Panjaitan - QA Analyst / Engineer"
         description={CONTENT.about.replace('{years}+', `${QA_YEARS}+ years`)}
       />
       <Hero />
