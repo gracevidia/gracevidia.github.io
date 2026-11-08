@@ -228,6 +228,15 @@ button:focus-visible {
   }
 }
 
+/* Expanding ripple (same speed/spread as Tailwind's animate-ping). */
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
 h1 {
   font-family: var(--font-google-sans), sans-serif;
   font-weight: 800;
@@ -553,14 +562,24 @@ h2 {
   font-size: 20px;
 }
 
-/* Pulsing sun dot marking the current job (matches the timeline dot). */
+/* Pulsing sun dot marking the current job: solid dot + expanding ripple ring. */
 .active-dot {
+  position: relative;
   display: inline-block;
   width: 9px;
   height: 9px;
   border-radius: 50%;
   background: var(--sun);
-  animation: pulse 2s infinite;
+}
+
+.active-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--sun);
+  opacity: .5;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 /* Job status next to the title: done vs running. */
@@ -644,7 +663,7 @@ h2 {
   font-size: 14px;
 }
 
-/* Current job: pulsing yellow dots like the active-dot, instead of checks. */
+/* Current job: active dots like the active-dot (solid + ripple), instead of checks. */
 .ticket--current .ticket-body ul li::before {
   content: "";
   left: 4px;
@@ -653,7 +672,19 @@ h2 {
   height: 8px;
   border-radius: 50%;
   background: var(--sun);
-  animation: pulse 2s infinite;
+}
+
+.ticket--current .ticket-body ul li::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sun);
+  opacity: .5;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 /* education */
