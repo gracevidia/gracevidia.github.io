@@ -1,5 +1,4 @@
 import { PROFILE } from 'data/profile';
-import { CONTENT } from 'data/content';
 
 export function Hero() {
   return (
@@ -13,14 +12,10 @@ export function Hero() {
           <span className="sticker">QA ✓</span>
         </div>
         <div>
-          <span className="status-pill">
-            <span className="dot" />
-            {CONTENT.statusPill}
-          </span>
-          <h1>
-            Hi, I&apos;m {PROFILE.displayName} —<br />
+          <h1>{PROFILE.displayName}</h1>
+          <p className="hero-role">
             <span className="hl">{PROFILE.role}</span>
-          </h1>
+          </p>
           <div className="social-row">
             {PROFILE.socials.map((social) => (
               <a

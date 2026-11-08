@@ -104,7 +104,9 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
+  /* Vertical rhythm only — side margins come from .wrap (36px, site-wide). */
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
 .brand {
@@ -150,22 +152,22 @@ button:focus-visible {
 
 .avatar-wrap {
   position: relative;
-  width: 160px;
+  width: 200px;
   flex-shrink: 0;
 }
 
 .avatar {
-  width: 160px;
-  height: 160px;
-  border-radius: 28px;
+  width: 200px;
+  height: 200px;
+  border-radius: 32px;
   background: linear-gradient(140deg, var(--teal), #0B7A67);
   border: 3px solid var(--ink);
-  box-shadow: 7px 7px 0 var(--sun);
+  box-shadow: 8px 8px 0 var(--sun);
   display: grid;
   place-items: center;
   overflow: hidden;
   font-family: var(--font-google-sans), sans-serif;
-  font-size: 60px;
+  font-size: 72px;
   font-weight: 800;
   color: #fff;
   transform: rotate(-2deg);
@@ -193,30 +195,6 @@ button:focus-visible {
   box-shadow: 3px 3px 0 var(--ink);
 }
 
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-google-sans), monospace;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink);
-  background: var(--teal-soft);
-  border: 2px solid var(--ink);
-  padding: 6px 15px;
-  border-radius: 99px;
-  margin-bottom: 20px;
-  box-shadow: 3px 3px 0 var(--ink);
-}
-
-.status-pill .dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--teal);
-  animation: pulse 2s infinite;
-}
-
 @keyframes pulse {
   0%,
   100% {
@@ -240,7 +218,8 @@ button:focus-visible {
 h1 {
   font-family: var(--font-google-sans), sans-serif;
   font-weight: 800;
-  font-size: clamp(40px, 7vw, 64px);
+  /* Same size as the section titles. */
+  font-size: clamp(28px, 4.5vw, 38px);
   line-height: 1.04;
   letter-spacing: -.02em;
   margin-bottom: 14px;
@@ -267,6 +246,15 @@ h1 {
 
 [data-theme="dark"] .hl {
   color: #23303B;
+}
+
+/* Role subtitle under the name. */
+.hero-role {
+  font-family: var(--font-google-sans), sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin-bottom: 16px;
 }
 
 .btn {
@@ -332,46 +320,6 @@ h2 {
   margin-bottom: 22px;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  list-style: none;
-  margin-bottom: 36px;
-}
-
-.tags li {
-  font-family: var(--font-google-sans), monospace;
-  font-size: 12px;
-  font-weight: 700;
-  border: 2px solid var(--ink);
-  padding: 7px 14px;
-  border-radius: 99px;
-  box-shadow: 3px 3px 0 var(--ink);
-  transition: transform .12s, box-shadow .12s;
-}
-
-.tags li:hover {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--ink);
-}
-
-.tags li:nth-child(4n+1) {
-  background: var(--sun-soft);
-}
-
-.tags li:nth-child(4n+2) {
-  background: var(--teal-soft);
-}
-
-.tags li:nth-child(4n+3) {
-  background: var(--tangerine-soft);
-}
-
-.tags li:nth-child(4n+4) {
-  background: var(--sky-soft);
-}
-
 .info-grid {
   display: flex;
   flex-wrap: wrap;
@@ -385,6 +333,13 @@ h2 {
   border-radius: 14px;
   padding: 12px 24px 12px 18px;
   box-shadow: 4px 4px 0 rgba(35, 48, 59, .12);
+  transition: transform .15s, box-shadow .15s;
+}
+
+/* Pop on hover like the other cards. */
+.info-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(35, 48, 59, .18);
 }
 
 .info-card .k {
@@ -559,7 +514,8 @@ h2 {
   gap: 8px;
   font-family: var(--font-google-sans), sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  /* Matches the education title size. */
+  font-size: 16px;
 }
 
 /* Pulsing sun dot marking the current job: solid dot + expanding ripple ring. */
@@ -751,26 +707,26 @@ h2 {
   align-self: center;
 }
 
-/* skills */
-.skill-group {
-  margin-bottom: 26px;
+/* stacks */
+.stack-row {
+  margin-bottom: 20px;
 }
 
-.skill-group:last-child {
+.stack-row:last-child {
   margin-bottom: 0;
 }
 
-.skill-group .g {
-  font-family: var(--font-google-sans), sans-serif;
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 12px;
+.stack-group {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: var(--font-google-sans), sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
-.skill-group .g .ico {
+.stack-ico {
   width: 30px;
   height: 30px;
   border-radius: 9px;
@@ -779,52 +735,77 @@ h2 {
   place-items: center;
   font-size: 14px;
   box-shadow: 2px 2px 0 var(--ink);
+  background: var(--sky-soft);
 }
 
-.skill-group:nth-child(2) .g .ico {
-  background: var(--teal-soft);
-}
-
-.skill-group:nth-child(3) .g .ico {
-  background: var(--sun-soft);
-}
-
-.skill-group:nth-child(4) .g .ico {
-  background: var(--tangerine-soft);
-}
-
-.skill-list {
+.stack-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
+  gap: 10px;
   list-style: none;
 }
 
-.skill-list li {
+.stack-items li {
   font-family: var(--font-google-sans), monospace;
   font-size: 12.5px;
   font-weight: 700;
   background: var(--card);
   border: 2px solid var(--ink);
-  padding: 7px 15px;
-  border-radius: 99px;
-  box-shadow: 3px 3px 0 rgba(35, 48, 59, .15);
-  transition: transform .12s, box-shadow .12s, background .12s;
+  border-radius: 8px;
+  padding: 5px 12px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .15s, box-shadow .15s;
 }
 
-.skill-list li:hover {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0 rgba(35, 48, 59, .2);
-  background: var(--sun);
-  color: #23303B;
-  border-color: #23303B;
+/* Pop on hover without changing colors. */
+.stack-items li:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
 }
 
 /* projects */
 .proj-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-flow: column;
+  /* 3 cards visible; the rest reachable by horizontal scroll. */
+  grid-auto-columns: calc((100% - 40px) / 3);
   gap: 20px;
+  overflow-x: auto;
+  /* Room for the hover lift (-2px) and the hard shadow without clipping
+     the card frames against the scroll container. */
+  padding: 2px 2px 8px;
+  scrollbar-width: none;
+}
+
+.proj-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Compact custom scrollbar: centered, hidden unless hovered or after a nav click. */
+.proj-scrollbar {
+  position: relative;
+  width: 200px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--dot);
+  margin: 14px auto 0;
+  opacity: 0;
+  transition: opacity .2s;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.proj-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--teal);
+}
+
+#projects:hover .proj-scrollbar,
+.proj-scrollbar.show {
+  opacity: 1;
 }
 
 .proj {
@@ -841,7 +822,65 @@ h2 {
 
 .proj:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 var(--ink);
+  /* Shadow stays flush with the frame while the card lifts. */
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+/* Section header: title left, optional actions (nav buttons) right. */
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.section-head h2 {
+  margin-bottom: 0;
+}
+
+/* Prev/next nav for the horizontal project row. */
+.proj-nav-row {
+  display: flex;
+  gap: 10px;
+}
+
+.proj-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 2.5px solid var(--ink);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+}
+
+.proj-nav:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.proj-nav:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.proj-nav:disabled {
+  opacity: .4;
+  cursor: default;
+  transform: none;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.ptype-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .proj .ptype {
@@ -855,22 +894,24 @@ h2 {
   padding: 3px 10px;
 }
 
-.proj:nth-child(3n+1) .ptype {
+/* Consistent color per type, independent of card position. */
+.ptype--test-automation {
   background: var(--sun-soft);
 }
 
-.proj:nth-child(3n+2) .ptype {
+.ptype--web {
   background: var(--teal-soft);
 }
 
-.proj:nth-child(3n+3) .ptype {
+.ptype--mobile {
   background: var(--tangerine-soft);
 }
 
 .proj h3 {
   font-family: var(--font-google-sans), sans-serif;
   font-weight: 700;
-  font-size: 18.5px;
+  /* Matches the education title size. */
+  font-size: 16px;
   color: var(--ink);
 }
 
@@ -879,29 +920,21 @@ h2 {
   color: var(--soft);
 }
 
-.proj a {
-  margin-top: auto;
-  font-family: var(--font-google-sans), monospace;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--action-link);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color .15s;
-}
-
-.proj a:hover {
-  color: var(--action-link-hover);
-}
-
-.project-actions {
-  display: flex;
+/* Inline external-link button inside the title (same as andresitorusz.github.io). */
+.proj-link {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 26px;
+  width: 24px;
+  height: 24px;
+  color: var(--sun);
+  vertical-align: middle;
+  line-height: 0;
+  transition: opacity .15s;
 }
 
-.proj-hidden {
-  display: none;
+.proj-link:hover {
+  opacity: .8;
 }
 
 /* footer */
@@ -914,21 +947,38 @@ footer {
   border-radius: 0;
 }
 
-.foot-note {
-  margin-top: 8px;
-  font-family: var(--font-google-sans), sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--soft);
+/* Footer row: build tag left, back-to-top right. */
+.foot-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.foot-note .highlight {
+.foot-note {
+  font-family: var(--font-google-sans), monospace;
+  font-size: 12px;
   font-weight: 700;
+  color: var(--soft);
+}
+
+.foot-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-google-sans), monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--soft);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color .15s;
+}
+
+.foot-top:hover {
+  color: var(--teal);
 }
 
 /* social icon buttons (hero) */
@@ -939,27 +989,28 @@ footer {
 }
 
 .icon-btn {
-  width: 52px;
-  height: 52px;
+  /* Same size as the project nav buttons. */
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
   border: 2.5px solid var(--ink);
-  border-radius: 16px;
+  border-radius: 10px;
   background: var(--card);
   color: var(--ink);
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
   transition: transform .15s, box-shadow .15s, background .15s;
 }
 
 .icon-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
 }
 
 .icon-btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 var(--ink);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
   background: var(--sun);
   color: #23303B;
 }
@@ -1093,6 +1144,11 @@ footer {
     padding: 34px 0 30px;
   }
 
+  /* One-and-a-bit project cards per view on small screens. */
+  .proj-grid {
+    grid-auto-columns: 85%;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -1124,17 +1180,16 @@ footer {
     box-shadow: 2px 2px 0 var(--ink);
   }
 
-  .status-pill {
-    font-size: 10px;
-    padding: 4px 11px;
-    margin-bottom: 12px;
-    box-shadow: 2px 2px 0 var(--ink);
-  }
 
   h1 {
     font-size: 26px;
     line-height: 1.18;
     margin-bottom: 8px;
+  }
+
+  .hero-role {
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 
   .info-grid {
@@ -1178,9 +1233,6 @@ footer {
     border-radius: 10px;
   }
 
-  .ticket-title h3 {
-    font-size: 16.5px;
-  }
 
   .ticket-title .org {
     font-size: 13px;
@@ -1232,7 +1284,7 @@ footer {
 }
 
 [data-theme="dark"] .proj:hover {
-  box-shadow: 5px 5px 0 rgba(0, 0, 0, .5);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, .5);
 }
 
 [data-theme="dark"] .ticket-card:hover,
@@ -1248,4 +1300,8 @@ footer {
 [data-theme="dark"] .info-card,
 [data-theme="dark"] .plain-list li {
   box-shadow: 3px 3px 0 rgba(0, 0, 0, .3);
+}
+
+[data-theme="dark"] .info-card:hover {
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, .5);
 }

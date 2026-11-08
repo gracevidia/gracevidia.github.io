@@ -12,7 +12,7 @@ function renderBullet(bullet: string) {
 // Inclusive month count for the current job (e.g. "Jun 2025 - Present").
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function monthsBetween(start: string): number {
+export function monthsBetween(start: string): number {
   const [monthName, yearText] = start.split(' ');
   const startMonth = MONTHS.indexOf(monthName);
   const startYear = Number(yearText);
@@ -90,13 +90,15 @@ export function Experience() {
               </div>
               <div className="ticket-period">
                 <span className="emp-type">{item.employmentType}</span>
-                {item.period}
+                <span>{item.period}</span>
                 {months !== undefined && (
                   <>
-                    {' '}· <DurationCounter months={months} />
+                    <span className="ticket-sep" aria-hidden>
+                      •
+                    </span>
+                    <DurationCounter months={months} />
                   </>
-                )}{' '}
-                · {item.location} · {item.workMode}
+                )}
               </div>
               <div className="ticket-body">
                 <ul>

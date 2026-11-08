@@ -29,17 +29,24 @@ export function useReveal() {
 
 type Props = {
   id: string;
-  title: string;
+  title?: string;
+  /** Optional controls rendered on the same row as the title, aligned right. */
+  actions?: ReactNode;
   children: ReactNode;
 };
 
-export function Section({ id, title, children }: Props) {
+export function Section({ id, title, actions, children }: Props) {
   const revealRef = useReveal();
 
   return (
     <section id={id}>
       <div ref={revealRef} className="wrap reveal">
-        <h2>{title}</h2>
+        {title && (
+          <div className="section-head">
+            <h2>{title}</h2>
+            {actions}
+          </div>
+        )}
         {children}
       </div>
     </section>

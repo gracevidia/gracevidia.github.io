@@ -1,10 +1,6 @@
 export const CONTENT = {
-  statusPill: 'AVAILABLE FOR WORK',
-  about: [
-    "I'm a QA engineer with 3+ years of experience testing web and mobile applications, and currently expanding into automation testing. My work covers the full testing cycle — writing and running test cases, smoke testing before releases, API testing with Postman, and digging into user-reported issues until I find the root cause. I've worked on products in the HRIS and waste management industries, collaborating closely with developers and product teams along the way. Most of my experience is in manual testing, and I recently completed an intensive Cypress bootcamp to start bringing automation into my work.",
-    "Good documentation matters to me — a test case or bug report should make sense to anyone who reads it, not just me. I like working close to the team, asking questions early instead of finding surprises late, and every project ends up teaching me something new about how to test better."
-  ],
-  tags: ['🔍 Detail-oriented', '⚡ Agile / Scrum', '📱 Web · Mobile · API', '🐞 Bug Advocate', '🚀 Fast Learner'],
+  about:
+    'QA Engineer with {years}+ of experience delivering dependable web and mobile apps. Known for clear documentation, thorough root-cause analysis, and working closely with dev teams to catch issues early. Grounded in manual testing and currently growing skills in test automation.',
   infoCards: [
     { k: 'Location', v: 'Jakarta, Indonesia' },
     { k: 'Work preference', v: 'Remote / Hybrid / On-site' }
@@ -19,8 +15,6 @@ export type ExperienceItemData = {
   period: string;
   /** Total months (inclusive), rendered as a count-up "1y 10m". Current jobs compute this live. */
   durationMonths?: number;
-  location: string;
-  workMode: string;
   logo: string;
   logoVariant: 'w4c' | 'dealls' | 'dame-ulos' | 'digitalent' | 'jatis' | 'code-id';
   fallback: string;
@@ -35,8 +29,6 @@ export const EXPERIENCES: ExperienceItemData[] = [
     org: 'Dame Ulos · Traditional Textile',
     employmentType: 'Freelance',
     period: 'Jun 2025 - Present',
-    location: 'Jakarta, Indonesia',
-    workMode: 'Remote',
     logo: '/img/company-logo/dame-ulos.webp',
     logoVariant: 'dame-ulos',
     fallback: 'D',
@@ -54,8 +46,6 @@ export const EXPERIENCES: ExperienceItemData[] = [
     employmentType: 'Full-time',
     period: 'Jun 2024 - May 2026',
     durationMonths: 24,
-    location: 'Jakarta, Indonesia',
-    workMode: 'Remote',
     logo: '/img/company-logo/dealls.webp',
     logoVariant: 'dealls',
     fallback: 'D',
@@ -72,13 +62,11 @@ export const EXPERIENCES: ExperienceItemData[] = [
     employmentType: 'Contract',
     period: 'Sep 2022 - Jun 2024',
     durationMonths: 22,
-    location: 'Jakarta, Indonesia',
-    workMode: 'Remote',
     logo: '/img/company-logo/w4c.webp',
     logoVariant: 'w4c',
     fallback: 'W',
     bullets: [
-      '*Test Planning & Execution*: Designed, maintained, and executed end-to-end test cases (manual, API, smoke, and regression) for trading, production applications, and client dashboards across environments.',
+      '*Test Planning & Execution*: Designed, maintained, and executed end-to-end test cases (manual, smoke, and regression) for trading, production applications, and client dashboards across environments.',
       '*Defect & Lifecycle Management*: Identified, tracked, and reported software defects while conducting post-deployment system monitoring to ensure application stability.',
       '*UAT & Stakeholder Collaboration*: Partnered with internal stakeholders to drive User Acceptance Testing (UAT) prior to major releases and provided on-demand testing for newly deployed features.',
       '*Requirement Analysis & Documentation*: Analyzed product requirements to deliver quality evaluations and recommendations while maintaining master test plans and versioning documentation.'
@@ -91,8 +79,6 @@ export const EXPERIENCES: ExperienceItemData[] = [
     employmentType: 'Contract',
     period: 'May 2023 - July 2023',
     durationMonths: 3,
-    location: 'Jakarta, Indonesia',
-    workMode: 'Remote',
     logo: '/img/company-logo/digitalent.webp',
     logoVariant: 'digitalent',
     fallback: 'D',
@@ -108,8 +94,6 @@ export const EXPERIENCES: ExperienceItemData[] = [
     employmentType: 'Internship',
     period: 'Oct 2021 - Feb 2022',
     durationMonths: 5,
-    location: 'Jakarta, Indonesia',
-    workMode: 'Remote',
     logo: '/img/company-logo/jatis-mobile.webp',
     logoVariant: 'jatis',
     fallback: 'J',
@@ -125,8 +109,6 @@ export const EXPERIENCES: ExperienceItemData[] = [
     employmentType: 'Internship',
     period: 'Jun 2021 - Aug 2021',
     durationMonths: 3,
-    location: 'Jakarta, Indonesia',
-    workMode: 'Remote',
     logo: '/img/company-logo/code.id.webp',
     logoVariant: 'code-id',
     fallback: 'C',
@@ -161,7 +143,7 @@ export const EDUCATION: EducationItemData[] = [
   {
     id: 'afteroffice',
     school: 'AfterOffice Academy',
-    degree: 'Intensive QA Automation Bootcamp – Cypress',
+    degree: 'Intensive QA Automation Bootcamp - Cypress',
     period: 'Apr 2025 - Jun 2025'
   }
 ];
@@ -177,30 +159,50 @@ export const SKILL_GROUPS: SkillGroupData[] = [
     icon: '🧪',
     name: 'Testing',
     skills: [
-      'Test Case Design',
+      'API Testing',
+      'Manual Testing',
+      'Mobile Testing (Android / iOS)',
       'Regression Testing',
       'Smoke Testing',
-      'Manual Testing',
-      'UAT',
-      'API Testing',
-      'Mobile Testing (Android & IOS)'
+      'Test Case Design',
+      'User Acceptance Testing (UAT)'
     ]
   },
   {
     icon: '🛠️',
     name: 'Tools',
-    skills: ['Jira', 'Click Up', 'Figma', 'Jam.dev', 'Cypress', 'Testiny', 'Postman', 'Confluence', 'VS Code']
+    skills: [
+      'Appium',
+      'Atlassian Confluence',
+      'Atlassian Jira',
+      'ClickUp',
+      'Cypress',
+      'Figma',
+      'GitHub',
+      'Google Spreadsheet',
+      'Jam.dev',
+      'Playwright',
+      'Postman',
+      'Testiny',
+      'Visual Studio Code'
+    ]
   },
   {
     icon: '🤝',
-    name: 'Ways of working',
-    skills: ['Agile / Scrum', 'Bug Triage', 'Documentation', 'Cross-team Communication']
+    name: 'Workflow',
+    skills: [
+      'Actionable Documentation',
+      'Bug Triage',
+      'Cross-Functional Communication',
+      'Continuous Feedback',
+      'Scrum'
+    ]
   }
 ];
 
 export type ProjectItemData = {
   id: string;
-  type: string;
+  types: string[];
   title: string;
   description: string;
   href: string;
@@ -209,42 +211,42 @@ export type ProjectItemData = {
 export const PROJECTS: ProjectItemData[] = [
   {
     id: 'playwright-suite',
-    type: 'TEST AUTOMATION',
+    types: ['TEST AUTOMATION', 'WEB'],
     title: 'Playwright Automation Suite',
     description:
       'End-to-end tests for the Kelas Otomesyen Test App, covering login, registration, and product management (add, edit, and delete), built with Playwright and TypeScript and run through GitHub Actions.',
-    href: 'https://github.com/gracevrp/kelasotomesyen-automation-playwright'
+    href: 'https://github.com/gracevidia/kelasotomesyen-automation-playwright'
   },
   {
     id: 'live-websites',
-    type: 'TEST AUTOMATION',
+    types: ['TEST AUTOMATION', 'WEB'],
     title: 'E2E Testing on Live Websites',
     description:
       'Cypress automation for real production sites — a flight booking flow on Agoda, product search and sorting on Amazon, and trending navigation on YouTube. Built with the Page Object Model, environment variables, and cross-page data assertions.',
-    href: 'https://github.com/gracevrp/Final-Project'
+    href: 'https://github.com/gracevidia/Final-Project'
   },
   {
     id: 'orangehrm',
-    type: 'TEST AUTOMATION',
+    types: ['TEST AUTOMATION', 'WEB'],
     title: 'OrangeHRM E2E UI Automation',
     description:
       'End-to-end Cypress tests for a web-based HR system — covering employee onboarding, leave entitlement, and a multi-role leave request and approval flow. Built around real HR workflows, switching between admin and employee accounts.',
-    href: 'https://github.com/gracevrp/UI-Testing-Cypress'
+    href: 'https://github.com/gracevidia/UI-Testing-Cypress'
   },
   {
     id: 'bdd-cypress',
-    type: 'TEST AUTOMATION',
+    types: ['TEST AUTOMATION', 'WEB'],
     title: 'BDD Automation with Cypress',
     description:
       'End-to-end tests for an e-commerce demo site, covering login, shopping cart, and checkout flows. Scenarios written in Gherkin with Cucumber, implemented in Cypress, and run automatically through GitHub Actions.',
-    href: 'https://github.com/gracevrp/BDD-Cypress-Project'
+    href: 'https://github.com/gracevidia/BDD-Cypress-Project'
   },
   {
     id: 'appium',
-    type: 'MOBILE AUTOMATION',
-    title: 'Flight Booking Automation — Appium',
+    types: ['TEST AUTOMATION', 'MOBILE'],
+    title: 'Flight Booking Automation - Appium',
     description:
       'Mobile automation tests for a flight booking app — covering one-way and round-trip booking flows. Built with Appium and Robot Framework using the Page Object Model.',
-    href: 'https://github.com/gracevrp/Sanber53-Appium-Kelompok-8'
+    href: 'https://github.com/gracevidia/Sanber53-Appium-Kelompok-8'
   }
 ];
