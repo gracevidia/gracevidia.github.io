@@ -8,7 +8,7 @@
 </head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Connection Lost | QA Portfolio</title>
+<title>Grace Panjaitan - QA Engineer</title>
 <!-- This page intentionally loads NO external fonts or resources,
      since it is shown exactly when there is no internet connection. -->
 <style>
@@ -26,7 +26,7 @@
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
   }
 
   body {
@@ -46,7 +46,7 @@
   .wrap {
     max-width: 480px;
     width: 100%;
-    text-align: center
+    text-align: center;
   }
 
   .icon {
@@ -66,13 +66,13 @@
     font-size: clamp(24px, 5vw, 32px);
     font-weight: 800;
     letter-spacing: -.01em;
-    margin-bottom: 10px
+    margin-bottom: 10px;
   }
 
   p {
     color: var(--soft);
     font-size: 15px;
-    margin-bottom: 26px
+    margin-bottom: 26px;
   }
 
   .status {
@@ -94,7 +94,19 @@
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: var(--fail)
+    background: var(--fail);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: .3;
+    }
   }
 
   .btn {
@@ -116,7 +128,15 @@
 
   .btn:hover {
     transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 var(--ink)
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+
+  .foot-note {
+    margin-top: 26px;
+    font-family: ui-monospace, "Courier New", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--soft);
   }
 </style>
 </head>
@@ -129,6 +149,7 @@
     <p>This page needs the internet, and right now there isn't any.
       Check your connection, then run the test again.</p>
     <button class="btn" onclick="location.reload()">↻ Retry connection</button>
+    <div class="foot-note">build: portofolio-v5.0.0</div>
   </div>
 </body>
 

@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { CONTENT } from 'data/content';
+import { CONTENT, QA_START } from 'data/content';
 import { Section } from './section';
 import { monthsBetween } from './experience';
-
-// First QA experience (Waste4Change contract) — the experience counter starts here.
-const QA_START = 'Sep 2022';
 
 // Counts up to the total years the first time it scrolls into view.
 function YearsCounter({ months }: { months: number }) {

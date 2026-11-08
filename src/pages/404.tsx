@@ -4,7 +4,7 @@ import Meta from 'components/meta';
 export default function NotFound() {
   return (
     <>
-      <Meta title="Page Not Found | QA Portfolio" noindex />
+      <Meta title="Page Not Found - QA Engineer" noindex />
       <div className="nf-wrap">
         <div className="nf-code">404</div>
         <p className="nf-sub">Well… this one slipped past QA. 🐞</p>
