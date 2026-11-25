@@ -418,8 +418,8 @@ button:focus-visible {
 
 .avatar-card:active {
   transform: translateY(-3px);
-  border-color: var(--accent);
-  box-shadow: var(--shadow-accent);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
   transition-duration: 0ms;
 }
 
@@ -1268,8 +1268,8 @@ button:focus-visible {
 
   .avatar-card:hover {
     transform: translateY(-3px);
-    border-color: var(--accent);
-    box-shadow: var(--shadow-accent);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
   }
 
   .avatar-card:hover .avatar-img {
