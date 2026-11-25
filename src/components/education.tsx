@@ -4,15 +4,15 @@ import { Section } from './section';
 export function Education() {
   return (
     <Section id="education" title="Education">
-      <ul className="plain-list">
+      <ul className="edu-list">
         {EDUCATION.map((item) => (
-          <li key={item.id}>
+          <li key={item.id} className="edu-card">
             <div className="edu-main">
-              <strong>{item.school}</strong>
-              <div className="edu-sub">{item.degree}</div>
+              <strong className="edu-school">{item.school}</strong>
+              <div className="edu-degree">{item.degree}</div>
               {item.grade && <span className="edu-grade">{item.grade}</span>}
             </div>
-            <span className="meta">{item.period}</span>
+            <span className="edu-period">{item.period}</span>
           </li>
         ))}
       </ul>

@@ -22,19 +22,24 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js');
     }
+    // Enables immediate CSS :active touch feedback on iOS Safari.
+    const onTouchStart = () => {};
+    document.addEventListener('touchstart', onTouchStart, { passive: true });
+    return () => document.removeEventListener('touchstart', onTouchStart);
   }, []);
 
   return (
-    <div className={cn(googleSans.className, googleSans.variable)}>
+    <div className={cn('site-shell', googleSans.className, googleSans.variable)}>
       <header className="topbar">
         <div className="wrap topbar-inner">
-          <span className="brand">
-            {PROFILE.brand} <span className="chip">{PROFILE.brandChip}</span>
-          </span>
+          <Link href="/" className="brand">
+            <span className="brand-name">{PROFILE.brand}</span>
+            <span className="brand-chip">{PROFILE.brandChip}</span>
+          </Link>
           <div className="top-right">
             {/* Home mark: lucide House (ISC-licensed), currentColor follows the theme. */}
             <Link href="/" aria-label="Home" className="icon-btn">
-              <House />
+              <House aria-hidden="true" />
             </Link>
             <ThemeToggle />
           </div>
@@ -64,7 +69,7 @@ function ThemeToggle() {
       className="icon-btn"
     >
       {/* Defaults to light, so the pre-hydration placeholder is the moon. */}
-      {!mounted ? <Moon aria-hidden /> : isDark ? <Sun aria-hidden /> : <Moon aria-hidden />}
+      {!mounted ? <Moon aria-hidden="true" /> : isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
     </button>
   );
 }

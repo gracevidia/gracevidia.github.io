@@ -40,9 +40,9 @@ npm run dev
 │   ├── data/          # All site content — edit this to change copy or lists
 │   │   ├── profile.ts #   Name, role, avatar, social links
 │   │   └── content.ts #   Experience, education, skills, projects, about text
-│   ├── lib/           # Small shared helpers (cn)
+│   ├── lib/           # Small shared helpers (cn, useCountUp)
 │   ├── pages/         # Routes: index, 404
-│   └── styles/        # globals.css (design system), fonts, module CSS
+│   └── styles/        # globals.css (design system), fonts
 ├── next.config.ts     # Static export config for GitHub Pages
 └── .github/workflows/deploy.yml
 ```

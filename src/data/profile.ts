@@ -23,7 +23,7 @@ const socials: Social[] = [
 
 export const PROFILE = {
   displayName: 'Grace Vidia Rosa Panjaitan',
-  role: 'QA Analyst / Engineer',
+  role: 'Quality Assurance Analyst / Engineer',
   avatar: '/img/pfp.webp',
   brand: 'test-suite.qa',
   brandChip: 'PASSED ✓',

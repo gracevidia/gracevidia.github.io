@@ -5,7 +5,7 @@ export function Footer() {
   const revealRef = useReveal();
 
   return (
-    <footer id="contact">
+    <footer id="contact" className="site-footer">
       <div ref={revealRef} className="wrap reveal">
         <div className="foot-row">
           <span className="foot-note">build: portofolio-v5.0.0</span>
@@ -15,7 +15,7 @@ export function Footer() {
             aria-label="Back to top"
             className="foot-top"
           >
-            Top <ArrowUp size={14} />
+            Top <ArrowUp size={14} aria-hidden="true" />
           </button>
         </div>
       </div>

@@ -1,76 +1,72 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, Link } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { PROJECTS } from 'data/content';
+import { cn } from 'lib/cn';
 import { Section } from './section';
 
-// Cards visible per page (matches the 3-up grid).
-const PAGE_SIZE = 3;
-// Custom scrollbar width; the thumb width is proportional to what's visible.
-const BAR_WIDTH = 200;
-const MIN_THUMB = 36;
+const MIN_THUMB_PERCENT = 18;
 
 export function Projects() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollbarRef = useRef<HTMLDivElement>(null);
-  const hideTimer = useRef<number | null>(null);
-  const [page, setPage] = useState(0);
+  const activeTimer = useRef<number | null>(null);
   const [progress, setProgress] = useState(0);
-  const [thumbWidth, setThumbWidth] = useState(MIN_THUMB);
+  const [thumbPercent, setThumbPercent] = useState(35);
   const [canScroll, setCanScroll] = useState(true);
-  const [scrollbarVisible, setScrollbarVisible] = useState(false);
+  const [barActive, setBarActive] = useState(false);
 
-  // Show the scrollbar briefly after a nav click, then hide it again.
-  const flashScrollbar = () => {
-    setScrollbarVisible(true);
-    if (hideTimer.current) window.clearTimeout(hideTimer.current);
-    hideTimer.current = window.setTimeout(() => setScrollbarVisible(false), 2000);
+  const pulseScrollbar = () => {
+    setBarActive(true);
+    if (activeTimer.current) window.clearTimeout(activeTimer.current);
+    activeTimer.current = window.setTimeout(() => setBarActive(false), 1600);
   };
 
-  const pageStep = () => {
+  // Reads the actual rendered card step and visible count so navigation works
+  // accurately across mobile (1 card), tablet (2 cards), and desktop (3 cards).
+  const getScrollMetrics = () => {
     const element = scrollRef.current;
-    if (!element) return 0;
-    const card = element.querySelector<HTMLElement>('.proj');
-    return card ? card.offsetWidth + 20 : element.clientWidth * 0.8;
+    if (!element) return { step: 0, visibleCards: 1 };
+    const card = element.querySelector<HTMLElement>('.proj-card');
+    const gap = Number.parseFloat(window.getComputedStyle(element).columnGap || '16') || 16;
+    const step = card ? card.offsetWidth + gap : element.clientWidth * 0.85;
+    const visibleCards = step > 0 ? Math.max(1, Math.floor((element.clientWidth + gap) / step)) : 1;
+    return { step, visibleCards };
   };
 
-  // Syncs the progress + thumb size with the actual row state.
   const syncScrollbar = () => {
     const element = scrollRef.current;
     if (!element) return;
     const max = element.scrollWidth - element.clientWidth;
-    setCanScroll(max > 0);
-    setProgress(max > 0 ? element.scrollLeft / max : 0);
-    const visible = element.scrollWidth > 0 ? element.clientWidth / element.scrollWidth : 1;
-    setThumbWidth(Math.max(MIN_THUMB, Math.round(BAR_WIDTH * visible)));
+    setCanScroll(max > 1);
+    setProgress(max > 1 ? Math.min(Math.max(element.scrollLeft / max, 0), 1) : 0);
+    const visibleRatio = element.scrollWidth > 0 ? element.clientWidth / element.scrollWidth : 1;
+    setThumbPercent(Math.min(100, Math.max(MIN_THUMB_PERCENT, visibleRatio * 100)));
   };
 
   useEffect(() => {
-    // Compute the thumb once after mount (before any hover) and on resize.
     const raf = requestAnimationFrame(syncScrollbar);
     window.addEventListener('resize', syncScrollbar);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', syncScrollbar);
+      if (activeTimer.current) window.clearTimeout(activeTimer.current);
     };
   }, []);
 
   const onScroll = () => {
-    // Keep the scrollbar visible while scrolling (mobile has no hover);
-    // it hides 2s after the last scroll event.
-    flashScrollbar();
+    pulseScrollbar();
     syncScrollbar();
-    const element = scrollRef.current;
-    if (!element) return;
-    const step = pageStep();
-    setPage(step > 0 ? Math.round(element.scrollLeft / (step * PAGE_SIZE)) : 0);
   };
 
-  // Page-based navigation: the next page shows a fresh set of cards.
-  const goToPage = (next: number) => {
+  const stepPage = (direction: -1 | 1) => {
     const element = scrollRef.current;
     if (!element) return;
-    element.scrollTo({ left: next * PAGE_SIZE * pageStep(), behavior: 'smooth' });
-    flashScrollbar();
+    const { step, visibleCards } = getScrollMetrics();
+    const max = element.scrollWidth - element.clientWidth;
+    const delta = direction * step * visibleCards;
+    const target = Math.min(Math.max(element.scrollLeft + delta, 0), max);
+    element.scrollTo({ left: target, behavior: 'smooth' });
+    pulseScrollbar();
   };
 
   const jumpTo = (clientX: number) => {
@@ -78,8 +74,10 @@ export function Projects() {
     const bar = scrollbarRef.current;
     if (!element || !bar) return;
     const rect = bar.getBoundingClientRect();
+    if (rect.width <= 0) return;
     const ratio = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
     element.scrollTo({ left: ratio * (element.scrollWidth - element.clientWidth), behavior: 'smooth' });
+    pulseScrollbar();
   };
 
   const onBarPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -88,7 +86,9 @@ export function Projects() {
   };
 
   const onBarPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (event.buttons & 1) jumpTo(event.clientX); // dragging
+    if (event.buttons & 1 || event.pointerType === 'touch') {
+      jumpTo(event.clientX);
+    }
   };
 
   return (
@@ -100,59 +100,70 @@ export function Projects() {
           <button
             type="button"
             className="proj-nav"
-            onClick={() => goToPage(page - 1)}
-            disabled={progress <= 0.001}
-            aria-label="Previous projects page"
+            onClick={() => stepPage(-1)}
+            disabled={!canScroll || progress <= 0.005}
+            aria-label="Previous projects"
           >
-            <ArrowLeft size={18} />
+            <ArrowLeft size={18} aria-hidden="true" />
           </button>
           <button
             type="button"
             className="proj-nav"
-            onClick={() => goToPage(page + 1)}
-            disabled={!canScroll || progress >= 0.999}
-            aria-label="Next projects page"
+            onClick={() => stepPage(1)}
+            disabled={!canScroll || progress >= 0.995}
+            aria-label="Next projects"
           >
-            <ArrowRight size={18} />
+            <ArrowRight size={18} aria-hidden="true" />
           </button>
         </div>
       }
     >
-      {/* Horizontal scroll row: 3 cards visible, scroll for the rest. */}
       <div className="proj-grid" ref={scrollRef} onScroll={onScroll}>
         {PROJECTS.map((project) => (
-          <article key={project.id} className="proj">
+          <article key={project.id} className="proj-card">
             <div className="ptype-row">
               {project.types.map((type) => (
-                <span key={type} className={`ptype ptype--${type.toLowerCase().replace(/\s+/g, '-')}`}>
+                <span key={type} className="ptype">
                   {type}
                 </span>
               ))}
             </div>
-            <h3>
-              {project.title}{' '}
-              <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label="Open project" className="proj-link">
-                <Link size={16} />
+            <div className="proj-head">
+              <h3 className="proj-title">{project.title}</h3>
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${project.title}`}
+                className="proj-link"
+              >
+                <ArrowUpRight size={16} aria-hidden="true" />
               </a>
-            </h3>
-            <p>{project.description}</p>
+            </div>
+            <p className="proj-desc">{project.description}</p>
           </article>
         ))}
       </div>
 
-      {/* Compact scrollbar: click or drag to move through the row. */}
-      <div
-        ref={scrollbarRef}
-        className={scrollbarVisible ? 'proj-scrollbar show' : 'proj-scrollbar'}
-        onPointerDown={onBarPointerDown}
-        onPointerMove={onBarPointerMove}
-        aria-hidden
-      >
+      {canScroll && (
         <div
-          className="proj-scrollbar-thumb"
-          style={{ width: `${thumbWidth}px`, left: `${progress * (BAR_WIDTH - thumbWidth)}px` }}
-        />
-      </div>
+          ref={scrollbarRef}
+          className={cn('proj-scrollbar', barActive && 'is-active')}
+          onPointerDown={onBarPointerDown}
+          onPointerMove={onBarPointerMove}
+          aria-hidden="true"
+        >
+          <div className="proj-scrollbar-track">
+            <div
+              className="proj-scrollbar-thumb"
+              style={{
+                width: `${thumbPercent}%`,
+                left: `${progress * (100 - thumbPercent)}%`
+              }}
+            />
+          </div>
+        </div>
+      )}
     </Section>
   );
 }

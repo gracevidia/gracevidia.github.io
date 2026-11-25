@@ -9,6 +9,11 @@ export function useReveal() {
     const element = ref.current;
     if (!element) return;
 
+    if (!('IntersectionObserver' in window)) {
+      element.classList.add('in');
+      return;
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -18,7 +23,7 @@ export function useReveal() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.01, rootMargin: '0px 0px -12px 0px' }
     );
     io.observe(element);
     return () => io.disconnect();
@@ -39,11 +44,11 @@ export function Section({ id, title, actions, children }: Props) {
   const revealRef = useReveal();
 
   return (
-    <section id={id}>
+    <section id={id} className="site-section">
       <div ref={revealRef} className="wrap reveal">
         {title && (
           <div className="section-head">
-            <h2>{title}</h2>
+            <h2 className="section-title">{title}</h2>
             {actions}
           </div>
         )}

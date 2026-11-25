@@ -3,7 +3,7 @@ export const QA_START = 'Sep 2022';
 
 export const CONTENT = {
   about:
-    'QA Analyst / Engineer with {years}+ of experience delivering dependable web and mobile apps. Known for clear documentation, thorough root-cause analysis, and working closely with dev teams to catch issues early. Grounded in manual testing and currently growing skills in test automation.',
+    'Quality Assurance Analyst / Engineer with {years}+ of experience delivering dependable web and mobile apps. Known for clear documentation, thorough root-cause analysis, and working closely with dev teams to catch issues early. Grounded in manual testing and currently growing skills in test automation.',
   infoCards: [
     { k: 'Location', v: 'Jakarta, Indonesia' },
     { k: 'Work preference', v: 'Remote / Hybrid / On-site' }
@@ -21,7 +21,7 @@ export type ExperienceItemData = {
   logo: string;
   logoVariant: 'w4c' | 'dealls' | 'dame-ulos' | 'digitalent' | 'jatis' | 'code-id';
   fallback: string;
-  isCurrent?: boolean;
+  isActive: boolean;
   bullets: string[];
 };
 
@@ -35,10 +35,10 @@ export const EXPERIENCES: ExperienceItemData[] = [
     logo: '/img/company-logo/dame-ulos.webp',
     logoVariant: 'dame-ulos',
     fallback: 'D',
-    isCurrent: true,
+    isActive: true,
     bullets: [
       '*UI Design & Requirement Engineering*: Designing user interfaces using Figma while leading requirement discussions with stakeholders to define project deliverables, scope, and specifications.',
-      '*Cross-Functional Coordinatio*n: Facilitating end-to-end communication with engineering teams throughout the development lifecycle to ensure smooth delivery.',
+      '*Cross-Functional Coordination*: Facilitating end-to-end communication with engineering teams throughout the development lifecycle to ensure smooth delivery.',
       '*Quality & Issue Resolution*: Performing manual testing against project requirements and investigating user-reported issues to identify root causes for prompt resolution.',
     ]
   },
@@ -52,6 +52,7 @@ export const EXPERIENCES: ExperienceItemData[] = [
     logo: '/img/company-logo/dealls.webp',
     logoVariant: 'dealls',
     fallback: 'D',
+    isActive: false,
     bullets: [
       '*End-to-End Test Execution*: Designed, maintained, and executed manual, smoke, and ad hoc API test cases (via Postman) across web and mobile (Android/iOS) platforms for key HRIS modules, including Attendance, Shift, On-Call, and OKR.',
       '*Product Quality & Strategy*: Analyzed product requirement documents (PRDs) and collaborated with engineering and product teams to drive feature improvements and ensure smooth release deliveries.',
@@ -68,6 +69,7 @@ export const EXPERIENCES: ExperienceItemData[] = [
     logo: '/img/company-logo/w4c.webp',
     logoVariant: 'w4c',
     fallback: 'W',
+    isActive: false,
     bullets: [
       '*Test Planning & Execution*: Designed, maintained, and executed end-to-end test cases (manual, smoke, and regression) for trading, production applications, and client dashboards across environments.',
       '*Defect & Lifecycle Management*: Identified, tracked, and reported software defects while conducting post-deployment system monitoring to ensure application stability.',
@@ -85,6 +87,7 @@ export const EXPERIENCES: ExperienceItemData[] = [
     logo: '/img/company-logo/digitalent.webp',
     logoVariant: 'digitalent',
     fallback: 'D',
+    isActive: false,
     bullets: [
       'Provided guidance and mentorship to participants learning Python basics and Django.',
       'Conducted project reviews, assessed progress, and delivered constructive feedback.'
@@ -100,6 +103,7 @@ export const EXPERIENCES: ExperienceItemData[] = [
     logo: '/img/company-logo/jatis-mobile.webp',
     logoVariant: 'jatis',
     fallback: 'J',
+    isActive: false,
     bullets: [
       'Developed a human resource information system web application, focusing on Career and CMS modules.',
       'Leveraged Bootstrap and the Laravel framework for implementation.'
@@ -115,6 +119,7 @@ export const EXPERIENCES: ExperienceItemData[] = [
     logo: '/img/company-logo/code.id.webp',
     logoVariant: 'code-id',
     fallback: 'C',
+    isActive: false,
     bullets: [
       'Built an Android application for selling office products, assigned to design and implement UI for login, registration, and dashboard screens.'
     ]
@@ -214,7 +219,7 @@ export type ProjectItemData = {
 export const PROJECTS: ProjectItemData[] = [
   {
     id: 'playwright-suite',
-    types: ['TEST AUTOMATION', 'WEB'],
+    types: ['Test Automation', 'Web'],
     title: 'Playwright Automation Suite',
     description:
       'End-to-end tests for the Kelas Otomesyen Test App, covering login, registration, and product management (add, edit, and delete), built with Playwright and TypeScript and run through GitHub Actions.',
@@ -222,7 +227,7 @@ export const PROJECTS: ProjectItemData[] = [
   },
   {
     id: 'live-websites',
-    types: ['TEST AUTOMATION', 'WEB'],
+    types: ['Test Automation', 'Web'],
     title: 'E2E Testing on Live Websites',
     description:
       'Cypress automation for real production sites — a flight booking flow on Agoda, product search and sorting on Amazon, and trending navigation on YouTube. Built with the Page Object Model, environment variables, and cross-page data assertions.',
@@ -230,7 +235,7 @@ export const PROJECTS: ProjectItemData[] = [
   },
   {
     id: 'orangehrm',
-    types: ['TEST AUTOMATION', 'WEB'],
+    types: ['Test Automation', 'Web'],
     title: 'OrangeHRM E2E UI Automation',
     description:
       'End-to-end Cypress tests for a web-based HR system — covering employee onboarding, leave entitlement, and a multi-role leave request and approval flow. Built around real HR workflows, switching between admin and employee accounts.',
@@ -238,7 +243,7 @@ export const PROJECTS: ProjectItemData[] = [
   },
   {
     id: 'bdd-cypress',
-    types: ['TEST AUTOMATION', 'WEB'],
+    types: ['Test Automation', 'Web'],
     title: 'BDD Automation with Cypress',
     description:
       'End-to-end tests for an e-commerce demo site, covering login, shopping cart, and checkout flows. Scenarios written in Gherkin with Cucumber, implemented in Cypress, and run automatically through GitHub Actions.',
@@ -246,7 +251,7 @@ export const PROJECTS: ProjectItemData[] = [
   },
   {
     id: 'appium',
-    types: ['TEST AUTOMATION', 'MOBILE'],
+    types: ['Test Automation', 'Mobile'],
     title: 'Flight Booking Automation - Appium',
     description:
       'Mobile automation tests for a flight booking app — covering one-way and round-trip booking flows. Built with Appium and Robot Framework using the Page Object Model.',

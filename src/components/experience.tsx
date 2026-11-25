@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { EXPERIENCES, ExperienceItemData } from 'data/content';
 import { cn } from 'lib/cn';
+import { useCountUp } from 'lib/use-count-up';
 import { Section } from './section';
 
 // Bullets support a simple *bold* syntax for leading labels.
@@ -9,7 +10,7 @@ function renderBullet(bullet: string) {
   return parts.map((part, index) => (index % 2 === 1 ? <strong key={index}>{part}</strong> : part));
 }
 
-// Inclusive month count for the current job (e.g. "Jun 2025 - Present").
+// Inclusive month count for active roles (e.g. "Jun 2025 - Present").
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export function monthsBetween(start: string): number {
@@ -28,39 +29,11 @@ function formatMonths(months: number): string {
   return `${rest}m`;
 }
 
-// Counts up to the total months the first time it scrolls into view.
 function DurationCounter({ months }: { months: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  // Without IntersectionObserver there is nothing to observe: show the final value.
-  const [value, setValue] = useState(() =>
-    typeof window !== 'undefined' && !('IntersectionObserver' in window) ? months : 0
-  );
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element || !('IntersectionObserver' in window)) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          io.disconnect();
-          const startTime = performance.now();
-          const durationMs = 800;
-          const tick = (now: number) => {
-            const progress = Math.min((now - startTime) / durationMs, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setValue(Math.round(eased * months));
-            if (progress < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }
-      });
-    }, { threshold: 0.3 });
-    io.observe(element);
-    return () => io.disconnect();
-  }, [months]);
+  const { ref, value } = useCountUp(months);
 
   return (
-    <span ref={ref} className="tabular-nums">
+    <span ref={ref} className="ticket-duration tabular-nums">
       {formatMonths(value)}
     </span>
   );
@@ -73,42 +46,32 @@ export function Experience() {
         {EXPERIENCES.map((item) => {
           const months =
             item.durationMonths ??
-            (item.isCurrent ? monthsBetween(item.period.split(' - ')[0]) : undefined);
+            (item.isActive ? monthsBetween(item.period.split(' - ')[0]) : undefined);
 
           return (
-            <article key={item.id} className={cn('ticket', item.isCurrent && 'ticket--current')}>
-            <div className="ticket-card">
-              <div className="ticket-head">
-                <TicketLogo item={item} />
-                <div className="ticket-title">
-                  <h3>
-                    {item.title}
-                    {item.isCurrent && <span className="active-dot" aria-label="Current job" />}
-                  </h3>
-                  <div className="org">{item.org}</div>
+            <article key={item.id} className={cn('ticket', item.isActive && 'ticket--active')}>
+              <div className="ticket-card">
+                <div className="ticket-head">
+                  <TicketLogo item={item} />
+                  <div className="ticket-title">
+                    <h3 className="ticket-role">{item.title}</h3>
+                    <div className="ticket-org">{item.org}</div>
+                  </div>
+                </div>
+                <div className="ticket-meta">
+                  <span className="emp-type">{item.employmentType}</span>
+                  <span className="ticket-period">{item.period}</span>
+                  {months !== undefined && <DurationCounter months={months} />}
+                </div>
+                <div className="ticket-body">
+                  <ul className="ticket-list">
+                    {item.bullets.map((bullet) => (
+                      <li key={bullet}>{renderBullet(bullet)}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-              <div className="ticket-period">
-                <span className="emp-type">{item.employmentType}</span>
-                <span>{item.period}</span>
-                {months !== undefined && (
-                  <>
-                    <span className="ticket-sep" aria-hidden>
-                      •
-                    </span>
-                    <DurationCounter months={months} />
-                  </>
-                )}
-              </div>
-              <div className="ticket-body">
-                <ul>
-                  {item.bullets.map((bullet) => (
-                    <li key={bullet}>{renderBullet(bullet)}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </article>
+            </article>
           );
         })}
       </div>
