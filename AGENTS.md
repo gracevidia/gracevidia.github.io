@@ -1,6 +1,6 @@
 <!-- BEGIN:nextjs-agent-rules -->
 
-## This is NOT the Next.js You Know
+## This Is NOT the Next.js You Know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
@@ -22,12 +22,12 @@ Website for gracevidia.github.io. Next.js 16 (pages router) + React 19 + Tailwin
 
 ## Design System
 
-- **Color Scheme — Figma #52: Wraith**: Core swatches are `--wraith-espresso: #1E1702`, `--wraith-umber: #342005`, `--wraith-olive: #8C886B`, `--wraith-mist: #E5E3E4`, `--wraith-white: #FFFFFF`, and `--wraith-emerald: #047C58`. Consume only semantic palette tokens (`--bg`, `--card`, `--surface-subtle`, `--ink`, `--ink-secondary`, `--soft`, `--olive(-soft/-border)`, `--accent(-hover/-ink/-soft/-border)`, `--border(-strong/-hover)`, `--topbar`, `--shadow-*`). They are theme-aware via `[data-theme="dark"]`; never hardcode theme colors in components.
-- **Clean Mobile-First Aesthetic**: Hairline `1px solid var(--border)` borders, soft diffused elevation (`--shadow-sm` / `--shadow-md`), un-rotated portrait frame (no sticker text on the PFP frame), and progressive enhancement at `480px`, `640px`, `768px`, and `1024px`.
+- **Color Scheme — Charcoal / Graphite + Emerald**: Core swatches are `--charcoal-950: #141517`, `--charcoal-900: #1D1F23`, `--charcoal-800: #2A2D32`, `--palette-slate: #6E737B`, `--palette-mist: #E5E3E4`, `--palette-white: #FFFFFF`, and `--palette-emerald: #047C58`. Consume only semantic palette tokens (`--bg`, `--card`, `--surface-subtle`, `--ink`, `--ink-secondary`, `--soft`, `--neutral(-soft/-border)`, `--accent(-hover/-ink/-soft/-border)`, `--border(-strong/-hover)`, `--topbar`, `--shadow-*`). They are theme-aware via `[data-theme="dark"]`; never hardcode theme colors in components.
+- **Clean Mobile-First Aesthetic**: Hairline `1px solid var(--border)` borders, soft diffused elevation (`--shadow-sm` / `--shadow-md`), full-bleed un-rotated portrait frame with an identical `2px` mist border (`#E5E3E4`) and inner rounded clip across both light and dark themes (no bottom mat gap or sticker text on the PFP frame), and progressive enhancement at `480px`, `640px`, `768px`, and `1024px`.
 - **Golden Ratio ($\varphi = 1.618$) Scale**:
   - Typography anchored at `1rem` (`16px`): desktop `body` `16px` → `h2` `1.618rem` (`~25.9px`) → `h1` `2.618rem` (`~41.9px`); mobile half-steps ($\sqrt{\varphi} = 1.272$); body line-height `1.618`.
   - Spacing tokens `--space-1` (`0.382rem`) through `--space-6` (`4.236rem`), $\varphi$-scaled radii (`6px`, `10px`, `16px`, `26px`), `1.618fr : 1fr` desktop hero grid (`61.8%` copy : `38.2%` portrait), `61.8ch` summary measure, and `1fr : 1.618fr` info-card grid aligned to `61.8%` width.
-- **Unified Metadata Pills**: Experience (`emp-type`, `ticket-period`, `ticket-duration`), Education (`edu-grade`, `edu-period`), and Project categories (`ptype`) all share the same Wraith olive pill block style (`--olive-soft` / `--olive-border` / `--ink-secondary`).
+- **Unified Metadata Pills**: Experience (`emp-type`, `ticket-period`, `ticket-duration`), Education (`edu-grade`, `edu-period`), and Project categories (`ptype`) all share the same neutral slate pill block style (`--neutral-soft` / `--neutral-border` / `--ink-secondary`).
 - **Interactions (Web & Mobile Parity)**:
   - Hover states live inside `@media (hover: hover) and (pointer: fine)` so mobile taps never stay stuck highlighted.
   - Touch `:active` states apply immediately (`transition-duration: 0ms`) and smoothly ease back via the base transition on release; `a, button` set `touch-action: manipulation` and `-webkit-tap-highlight-color: transparent`, paired with a passive `touchstart` listener in `layout.tsx` for iOS Safari.

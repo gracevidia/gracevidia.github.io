@@ -5,7 +5,7 @@ export function Hero() {
     <header className="hero">
       <div className="wrap hero-grid">
         <div className="avatar-wrap">
-          <div className="avatar-card" tabIndex={0} role="img" aria-label={PROFILE.displayName}>
+          <div className="avatar-card">
             <div className="avatar-frame">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={PROFILE.avatar} alt={PROFILE.displayName} className="avatar-img" />
